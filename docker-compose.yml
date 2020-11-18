@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+  app:
+    container_name: cargo-type-ms
+    image: durpyshark/cargo-type-ms
+    build: ./
+    ports:
+      - "8081:8081"
+    depends_on:
+      - cargo_types_db_container
+  cargo_types_db_container:
+    image: postgres
+    ports:
+      - "5433:5433"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=cargo_types_db
+    command: -p 5433
